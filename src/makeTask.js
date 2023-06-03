@@ -1,5 +1,5 @@
 export default function taskFactory(title, desc, due, priority, currentProj) {
-  isComplete = false;
+  const isComplete = false;
 
   const lowerPriority = () => {
     priority -= 1;

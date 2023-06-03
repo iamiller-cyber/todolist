@@ -1,13 +1,16 @@
 const newList = [];
 
-export default function placeTask(task, array) {
-  if (task.currentProj == null || array == null) {
+export default function placeTask(task, proj) {
+  if (proj == null) {
     task.currentProj = newList;
     newList.push(task);
+  } else if (task.currentProj == undefined) {
+    proj.tasks.push(task);
+    task.currentProj = proj;
   } else {
-    task.currentProj.splice(task.currentProj.indexOf(task), 1);
-    array.push(task);
-    task.currentProj = array;
+    task.currentProj.tasks.splice(task.currentProj.tasks.indexOf(task), 1);
+    proj.tasks.push(task);
+    task.currentProj = proj;
   }
 }
 
