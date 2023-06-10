@@ -1,3 +1,25 @@
 body {
   box-sizing: border-box;
 }
+
+header {
+  background-color: slateblue;
+  display: flex;
+  justify-content: space-between;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+#taskPost {
+  display: grid;
+  gap: 0.5em;
+}
+
+.delete {
+  width: 10em;
+  height: 10em;
+  background-color: red;
+}
