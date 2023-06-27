@@ -2,6 +2,28 @@ body {
   box-sizing: border-box;
 }
 
+#projPost {
+  display: grid;
+  margin: 15px 0 10px 0;
+  gap: 5px;
+}
+
+.projCard {
+  width: 10em;
+  height: 10em;
+  background-color: darkcyan;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.projTitle {
+  background-color: blanchedalmond;
+  font-size: 1.2em;
+  text-align: center;
+  color: black;
+}
+
 header {
   background-color: slateblue;
   display: flex;
@@ -11,6 +33,7 @@ header {
 #main {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  position: relative;
 }
 
 #taskPost {
@@ -18,8 +41,32 @@ header {
   gap: 0.5em;
 }
 
-.delete {
-  width: 10em;
-  height: 10em;
+.deleteTask {
   background-color: red;
+}
+
+.expand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.expButton {
+  background-color: rgb(127, 127, 183);
+}
+
+.closeBut {
+  background-color: rgb(127, 127, 183);
+}
+
+.prior0 {
+  background-color: red;
+}
+
+.prior1 {
+  background-color: orange;
+}
+
+.prior2 {
+  background-color: green;
 }

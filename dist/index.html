@@ -6,28 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="main.js" defer></script>
     <title>GetItDone</title>
-    <header>
-      <h1>!Get It Done!</h1>
-      <form action="post">
-        <label for="name">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="name"
-          required
-        />
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="password"
-          required
-        />
-        <button id="loginBut"></button>
-      </form>
-    </header>
+  </head>
+  <header>
+    <h1>!Get It Done!</h1>
+    <form action="post">
+      <label for="name">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="name"
+        required
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+        required
+      />
+      <button id="loginBut"></button>
+    </form>
+  </header>
+  <body>
     <div id="main">
       <div id="newList">
         <form id="taskPost" action="post">
@@ -44,7 +46,7 @@
             name="desc"
             id="desc"
             cols="30"
-            rows="5"
+            rows="4"
             placeholder="What do you gotta do here?"
           ></textarea>
           <label for="hour">Hour</label>
@@ -113,12 +115,30 @@
             <option value="1">Keep it in mind.</option>
             <option value="2">I'll get to it.</option>
           </select>
+          <label for="project">Add this task to a current project?</label>
+          <select name="project" id="project"></select>
+          <button id="taskSub">Let's track it!</button>
+        </form>
+        <form id="projPost">
+          <label for="projectTitle">Project</label>
+          <input
+            type="text"
+            id="projectTitle"
+            name="projectTitle"
+            placeholder="Name your project"
+          />
+          <label for="projectDesc" id="projectDesc">Description</label>
+          <textarea
+            name="projectDesc"
+            id="projectDesc"
+            cols="30"
+            rows="4"
+          ></textarea>
         </form>
         <div id="freshList"></div>
         <div id="completedTasks"></div>
       </div>
       <div id="projects"></div>
     </div>
-  </head>
-  <body></body>
+  </body>
 </html>
