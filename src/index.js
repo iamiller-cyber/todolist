@@ -1,6 +1,6 @@
 import "./style.css";
-import makeTask from "./makeTask.js";
-import { default as placeTask, deleteTask, newList } from "./placeTask";
+import { default as makeTask, taskArray } from "./makeTask.js";
+import { default as placeTask, deleteTask } from "./placeTask";
 import { default as makeProj, projectArray } from "./makeProject.js";
 
 import differenceInDays from "date-fns/differenceInDays";
@@ -11,14 +11,13 @@ import addHours from "date-fns/addHours";
 let theNight = makeProj("The Night", "Things I gotta do tonight");
 let theDay = makeProj("The Day", "Things I gotta do today");
 
-console.log(projectArray);
-
 let jo = makeTask("Jo", "gotta jo", 2025, 1, 6, 23, 0);
 let kissWife = makeTask("kiss wife", "gotta kiss wife", 2025, 1, 6, 23, 1);
 
 placeTask(kissWife, theNight);
 placeTask(jo);
-console.log(newList);
+
+// have to turn option selection into the array it represents
 
 function deleteButton(array, num) {
   const del = document.createElement("button");
@@ -46,6 +45,13 @@ function clearProj() {
   let projects = document.getElementById("projects");
   let projCards = document.getElementsByClassName("projCard");
   Array.from(projCards).forEach((projCard) => projects.removeChild(projCard));
+
+  // dropdown menu
+  let dropdown = document.getElementById("project");
+  let children = dropdown.childNodes;
+  children.forEach((child) => {
+    dropdown.removeChild(child);
+  });
 }
 
 function displayFresh() {
@@ -99,7 +105,6 @@ function createPopUp(task) {
 
 function createTaskCard(task) {
   let taskCard = document.createElement("div");
-  console.log(task);
   taskCard.setAttribute(
     "data-index",
     `${task.currentProj.tasks.indexOf(task)}`
@@ -123,7 +128,7 @@ function createTaskCard(task) {
   return taskCard;
 }
 
-function createProject(proj) {
+function createProjectCard(proj) {
   let card = document.createElement("div");
   let title = document.createElement("div");
   let projDesc = document.createElement("h3");
@@ -160,10 +165,19 @@ function displayProjects() {
   });
 }
 
-displayProjects();
-displayFresh();
+function dropdownProjects() {
+  const projects = document.getElementById("project");
+  projectArray.forEach((project) => {
+    const option = document.createElement("option");
+    const opText = document.createTextNode(`${project.title}`);
+    option.setAttribute("value", `${project.title}`);
+    option.appendChild(opText);
+    projects.appendChild(option);
+  });
+}
 
-function makeTasks() {
+// have to figure out how to select currentProj
+function inputTasks() {
   const submit = document.getElementById("taskSub");
   const name = document.getElementById("title");
   const desc = document.getElementById("desc");
@@ -172,16 +186,68 @@ function makeTasks() {
   const month = document.getElementById("month");
   const year = document.getElementById("year");
   const priority = document.getElementById("priority");
-  taskSub.addEventListener("click", function () {
-    makeTask(
-      name.value,
-      desc.value,
-      year.value,
-      month.value,
-      day.value,
-      hour.value,
-      priority.value,
-      currentProj.value
-    );
+  const projSelect = document.getElementById("project");
+  submit.addEventListener("click", function (e) {
+    if (!name.value) return;
+    else {
+      e.preventDefault();
+      projSelect.options[projSelect.selectedIndex].value.push(
+        makeTask(
+          name.value,
+          desc.value,
+          year.value,
+          month.value,
+          day.value,
+          hour.value,
+          priority.value,
+          projSelect.options[projSelect.selectedIndex].value
+        )
+      );
+      taskStorage();
+    }
   });
 }
+
+function inputProjects() {
+  const submit = document.getElementById("projSub");
+  const name = document.getElementById("projectTitle");
+  const desc = document.getElementById("projectDesc");
+  submit.addEventListener("click", function (e) {
+    if (!name.value) return;
+    else {
+      e.preventDefault();
+      makeProj(name.value, desc.value);
+      projectStorage();
+      clearProj();
+      dropdownProjects();
+      displayProjects();
+    }
+  });
+}
+
+// set up local storage
+
+function projectStorage() {
+  localStorage.setItem("projects", JSON.stringify(projectArray));
+}
+
+function taskStorage() {
+  localStorage.setItem("tasks", JSON.stringify(taskArray));
+}
+
+function retrieveStored() {
+  JSON.parse(localStorage.getItem("tasks"));
+  JSON.parse(localStorage.getItem("projects"));
+}
+function startUI() {
+  if (localStorage.getItem("tasks") || localStorage.getItem("projects")) {
+    retrieveStored();
+    displayProjects();
+    displayFresh();
+    dropdownProjects();
+  }
+  inputTasks();
+  inputProjects();
+}
+
+startUI();

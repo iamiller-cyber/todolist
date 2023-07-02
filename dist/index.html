@@ -10,7 +10,7 @@
   <header>
     <h1>!Get It Done!</h1>
     <form action="post">
-      <label for="name">Username</label>
+      <label for="username">Username</label>
       <input
         type="text"
         id="username"
@@ -26,13 +26,13 @@
         placeholder="password"
         required
       />
-      <button id="loginBut"></button>
+      <button type="button" id="loginBut"></button>
     </form>
   </header>
   <body>
     <div id="main">
       <div id="newList">
-        <form id="taskPost" action="post">
+        <form id="taskPost">
           <label for="title">Task</label>
           <input
             type="text"
@@ -41,7 +41,7 @@
             placeholder="Task name"
             required
           />
-          <label for="description">Description</label>
+          <label for="desc">Description</label>
           <textarea
             name="desc"
             id="desc"
@@ -116,8 +116,10 @@
             <option value="2">I'll get to it.</option>
           </select>
           <label for="project">Add this task to a current project?</label>
-          <select name="project" id="project"></select>
-          <button id="taskSub">Let's track it!</button>
+          <select name="project" id="project">
+            <option value="0">Just for today</option>
+          </select>
+          <button type="button" id="taskSub">Let's track it!</button>
         </form>
         <form id="projPost">
           <label for="projectTitle">Project</label>
@@ -126,17 +128,20 @@
             id="projectTitle"
             name="projectTitle"
             placeholder="Name your project"
+            required
           />
-          <label for="projectDesc" id="projectDesc">Description</label>
+          <label for="projectDesc">Description</label>
           <textarea
             name="projectDesc"
             id="projectDesc"
             cols="30"
             rows="4"
           ></textarea>
+          <button id="projSub">New Proj</button>
         </form>
+        <div id="todayTasks">New Tasks</div>
         <div id="freshList"></div>
-        <div id="completedTasks"></div>
+        <div id="completedProjects"></div>
       </div>
       <div id="projects"></div>
     </div>

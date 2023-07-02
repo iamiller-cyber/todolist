@@ -29,6 +29,17 @@ export default function taskFactory(
     }
   };
 
+  taskArray.push({
+    title,
+    desc,
+    due: new Date(year, month, day, hours),
+    priority,
+    currentProj,
+    lowerPriority,
+    raisePriority,
+    complete,
+  });
+
   return {
     title,
     desc,
@@ -40,3 +51,5 @@ export default function taskFactory(
     complete,
   };
 }
+
+export const taskArray = [];

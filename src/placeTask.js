@@ -1,7 +1,4 @@
 const goals = [];
-const newList = {
-  tasks: [],
-};
 
 export default function placeTask(task, proj) {
   if (proj == undefined) {
@@ -20,4 +17,4 @@ export default function placeTask(task, proj) {
 function deleteTask(task) {
   task.currentProj.tasks.splice(task.currentProj.tasks.indexOf(task), 1);
 }
-export { goals, deleteTask, newList };
+export { goals, deleteTask };

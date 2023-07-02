@@ -1,4 +1,10 @@
-export const projectArray = [];
+export const projectArray = [
+  {
+    tasks: [],
+    title: "New Tasks",
+    desc: "Tasks created today",
+  },
+];
 
 export default function projectFactory(title, desc) {
   const tasks = [];
